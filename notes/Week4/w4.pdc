@@ -1,0 +1,46 @@
+% Neural Networks: Representation
+% Termanteus
+% 10 January 2020
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+# I. Non-linear Classification
+- For these types of problems, using linear/logistics regression still might be working if you keep adding more polynomial elements to the equations, but that would be computationally expensive ($O(\frac{n^2}{2})$ for squared term and so on,...), or causing overfiting so probably only fit for 2 features problems.
+- Leads to **Neural Network**: which is more suitable for these scenarios.
+
+# II. Neural Networks
+## 1. Model representation
+- In this model, our $x_{0}$ input node is called "_bias unit_" (always equal to 1). We use the same  *logistic function* as in classification (sometimes called sigmoid activation function); and theta is "weights":
+
+$$\sigma = \frac{1}{1+e^{-theta^{T}x}}$$
+
+![Simple Neural Network](./neural_network.png)
+
+- Mathematical Representation:
+
+![](./equation.png)
+
+- Each layer get its own matrix of weights, $\theta^{j}$, determined as follow: "If network has  $s_{j}$ unit layer in j and  $s_{j+1}$ in layer j+1, then  $\theta^{j}$ will be of dimension  $s_{j+1} x (s_{j} + 1)$." (+1 because of the addition of the bias node: $x_0$ ).
+
+- Vectorized implementation:
+  - Define: $z_{k}^{(i)}$ such that:
+\begin{align*}
+  a_1^{(2)} = g(z_1^{(2)}) \\
+  a_2^{(2)} = g(z_2^{(2)}) \\
+  a_3^{(2)} = g(z_3^{(2)}) \\
+\end{align*}
+  - We can deduce to the vectorized equation:
+\begin{align*}
+	z^{(j)} &= \Theta^{j-1}a^{j-1} \\
+	a^{(j)} &= g(z^{(j)})
+\end{align*}
+
+- In the last layer, theta will have **one row** and a will be **one column**, leads to the result is a single number, the final result:
+$$h_{\Theta}(x) = a^{j+1} = g(z^{j+1})$$
+
+- Notice in the **last step** (layer j and j+1), we are do the **exact same thing** as we did in **logistic regression**.
+
+## 2. Multiclass Classification
+![Multiclass Representation - Andrew NG](./multiclass.png)
